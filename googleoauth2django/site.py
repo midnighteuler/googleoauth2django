@@ -1,6 +1,4 @@
-#!/bin/bash
-#
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2015 Google Inc.  All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,22 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Build the googleoauth2django docs.
 
-set -e
+"""Contains Django URL patterns used for OAuth2 flow."""
 
-rm -rf docs/_build/* docs/source/*
-sphinx-apidoc --separate --force -o docs/source googleoauth2django
-# We only have one package, so modules.rst is overkill.
-rm -f docs/source/modules.rst
+from django.conf import urls
 
-# If anything has changed
-if [[ -n "$(git diff -- docs/)" ]]; then
-    echo "sphinx-apidoc generated changes that are not checked in to version control."
-    exit 1
-fi
+from googleoauth2django import views
 
-cd docs
-make html
-cd ..
+urlpatterns = [
+    urls.url(r'oauth2callback/', views.oauth2_callback, name="callback"),
+    urls.url(r'oauth2authorize/', views.oauth2_authorize, name="authorize")
+]
+
+urls = (urlpatterns, "google_oauth", "google_oauth")

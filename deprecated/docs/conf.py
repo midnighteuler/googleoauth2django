@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# googleoauth2django documentation build configuration file, created by
+# oauth2client documentation build configuration file, created by
 # sphinx-quickstart on Wed Dec 17 23:13:19 2014.
 #
 
@@ -12,7 +12,7 @@ import sys
 # settings module and load it. This assumes django has been installed
 # (but it must be for the docs to build), so if it has not already
 # been installed run `pip install -r docs/requirements.txt`.
-os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.contrib.django_util.settings'
 import django
 import mock
 from pkg_resources import get_distribution
@@ -30,7 +30,15 @@ class Mock(mock.Mock):
 
 
 MOCK_MODULES = (
-    'google'
+    'google',
+    'google.appengine',
+    'google.appengine.api',
+    'google.appengine.api.app_identiy',
+    'google.appengine.api.urlfetch',
+    'google.appengine.ext',
+    'google.appengine.ext.webapp',
+    'google.appengine.ext.webapp.util',
+    'werkzeug.local',
 )
 
 
@@ -52,11 +60,11 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'googleoauth2django'
+project = u'oauth2client'
 copyright = u'2014, Google, Inc'
 
 # Version info
-distro = get_distribution('googleoauth2django')
+distro = get_distribution('oauth2client')
 version = distro.version
 release = distro.version
 
@@ -80,27 +88,27 @@ html_favicon = '_static/favicon.ico'
 
 html_static_path = ['_static']
 html_logo = '_static/google_logo.png'
-htmlhelp_basename = 'googleoauth2djangodoc'
+htmlhelp_basename = 'oauth2clientdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {}
 latex_documents = [
-    ('index', 'googleoauth2django.tex', u'googleoauth2django Documentation',
+    ('index', 'oauth2client.tex', u'oauth2client Documentation',
      u'Google, Inc.', 'manual'),
 ]
 
 # -- Options for manual page output ---------------------------------------
 
 man_pages = [
-    ('index', 'googleoauth2django', u'googleoauth2django Documentation',
+    ('index', 'oauth2client', u'oauth2client Documentation',
      [u'Google, Inc.'], 1)
 ]
 
 # -- Options for Texinfo output -------------------------------------------
 
 texinfo_documents = [
-    ('index', 'googleoauth2django', u'googleoauth2django Documentation',
-     u'Google, Inc.', 'googleoauth2django', 'One line description of project.',
+    ('index', 'oauth2client', u'oauth2client Documentation',
+     u'Google, Inc.', 'oauth2client', 'One line description of project.',
      'Miscellaneous'),
 ]

@@ -6,9 +6,7 @@ omit =
     */samples/*
     */conftest.py
     # Don't report coverage over platform-specific modules.
-    oauth2client/contrib/_fcntl_opener.py
-    oauth2client/contrib/_win32_opener.py
-    oauth2client/contrib/django_util/apps.py
+    googleoauth2django/apps.py
 exclude_lines =
     # Re-enable the standard pragma
     pragma: NO COVER

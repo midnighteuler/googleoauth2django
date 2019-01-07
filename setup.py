@@ -1,76 +1,48 @@
-# Copyright 2014 Google Inc. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""Setup script for oauth2client.
-
-Also installs included versions of third party libraries, if those libraries
-are not already installed.
-"""
-from __future__ import print_function
-
-import sys
-
+"""Setup script for googleoauth2django."""
 from setuptools import find_packages
 from setuptools import setup
 
-import oauth2client
-
-if sys.version_info < (2, 7):
-    print('oauth2client requires python2 version >= 2.7.', file=sys.stderr)
-    sys.exit(1)
-if (3, 1) <= sys.version_info < (3, 4):
-    print('oauth2client requires python3 version >= 3.4.', file=sys.stderr)
-    sys.exit(1)
-
-install_requires = [
-    'httplib2>=0.9.1',
-    'pyasn1>=0.1.7',
-    'pyasn1-modules>=0.0.5',
-    'rsa>=3.1.4',
-    'six>=1.6.1',
-]
-
 long_desc = """
-oauth2client is a client library for OAuth 2.0.
-
-Note: oauth2client is now deprecated. No more features will be added to the
-    libraries and the core team is turning down support. We recommend you use
-    `google-auth <https://google-auth.readthedocs.io>`__ and
-    `oauthlib <http://oauthlib.readthedocs.io/>`__.
+googleoauth2django is oauth2client.contrib.django_util redone to instead use 
+google-auth-oauthlib and supports django 2, as oauth2client was deprecated.
 """
 
-version = oauth2client.__version__
-
+dev_deps = [
+    'pytest',
+    'mock>=2.0.0',
+    'ipdb>=0.11',
+    'django-extensions'
+]
+extras = {
+    'dev': dev_deps
+}
 setup(
-    name='oauth2client',
-    version=version,
-    description='OAuth 2.0 client library',
+    name='googleoauth2django',
+    version='0.0.1',
+    description='oauth2client.contrib.django_util sans oauth2client',
     long_description=long_desc,
-    author='Google Inc.',
-    author_email='jonwayne+oauth2client@google.com',
-    url='http://github.com/google/oauth2client/',
-    install_requires=install_requires,
-    packages=find_packages(exclude=('tests*',)),
+    author='Michael Souza',
+    author_email='mike@michaelsouza.com',
+    url='http://github.com/midnighteuler/googleoauth2django/',
+    install_requires=[
+        'django>=2.1.5',
+        'google-auth-oauthlib>=0.2.0',
+        'google-auth>=1.6.2',
+        'requests-oauthlib>=1.0.0',
+        'oauthlib>=2.1.0',
+        'jsonpickle>=1.0',
+        'six'
+    ],
+    tests_require=dev_deps,
+    extras_require=extras,
+    packages=find_packages(exclude=('tests*', 'deprecated*')),
     license='Apache 2.0',
-    keywords='google oauth 2.0 http client',
+    keywords='google oauth 2.0 django',
     classifiers=[
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
-        'Development Status :: 7 - Inactive',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: POSIX',

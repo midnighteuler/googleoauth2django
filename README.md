@@ -1,33 +1,31 @@
-[![Build Status](https://travis-ci.org/google/oauth2client.svg?branch=master)](https://travis-ci.org/google/oauth2client)
-[![Coverage Status](https://coveralls.io/repos/google/oauth2client/badge.svg?branch=master&service=github)](https://coveralls.io/github/google/oauth2client?branch=master)
-[![Documentation Status](https://readthedocs.org/projects/oauth2client/badge/?version=latest)](https://oauth2client.readthedocs.io/)
+# googleoauth2django
 
-This is a client library for accessing resources protected by OAuth 2.0.
+oauth2client is deprecated and there seems to be no path forward for poor souls who used the contrib/django_util code from it.
 
-**Note**: oauth2client is now deprecated. No more features will be added to the
-libraries and the core team is turning down support. We recommend you use
-[google-auth](https://google-auth.readthedocs.io) and [oauthlib](http://oauthlib.readthedocs.io/). For more details on the deprecation, see [oauth2client deprecation](https://google-auth.readthedocs.io/en/latest/oauth2client-deprecation.html).
+So I converted django_util to support Django >=2, Python 3.6, and google-auth-oauthlib.
+See: https://github.com/googleapis/google-auth-library-python/issues/181
 
-Installation
-============
 
-To install, simply run the following command in your terminal:
+## Notes
+AFAIK, all unit tests are passing, 100% coverage was maintained from oauth2client, and the docs are appropriately changed.
 
-```bash
-$ pip install --upgrade oauth2client
-```
+The pipenv files (Pipfile, Pipfile.lock) are in VCS for convenience; the required libs are explicitly in setup.py.
 
-Contributing
-============
+I had to make some arbitrary decisions:
+ * Credentials go into the CredentialsField ORM using jsonpickle.
+ * Rather than storing the "Flow" object into request.session, I store a "flow_settings" that can be used to construct the flow, as the Flow object isn't serializable.
 
-Please see the [CONTRIBUTING page][1] for more information. In particular, we
-love pull requests -- but please make sure to sign the contributor license
-agreement.
+I left the old oauth2client files within `deprecated/`, and attempted to leave the git history sensible so it's clear what files went where.
 
-Supported Python Versions
-=========================
+## Development
+Install editable: `pip install -e .[dev]`
 
-We support Python 2.7 and 3.4+. More information [in the docs][2].
+Build docs: `tox -e docs`
 
-[1]: https://github.com/google/oauth2client/blob/master/CONTRIBUTING.md
-[2]: https://oauth2client.readthedocs.io/#supported-python-versions
+Run tests: `python manage.py test`
+
+Run coverage test with tox: `tox -e cover`
+
+Run flake8 with tox: `tox -e flake8`
+
+I added a django "manage.py" that can be run with `python manage.py runserver`.

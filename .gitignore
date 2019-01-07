@@ -1,6 +1,6 @@
 # Build artifacts
 *.py[cod]
-oauth2client.egg-info/
+googleoauth2django.egg-info/
 build/
 dist/
 
@@ -29,3 +29,4 @@ tests/data/user-key.json
 
 # PyCharm configuration:
 .idea
+*.iml

@@ -14,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Build the googleoauth2django docs.
+# Build the oauth2client docs.
 
 set -e
 
 rm -rf docs/_build/* docs/source/*
-sphinx-apidoc --separate --force -o docs/source googleoauth2django
+sphinx-apidoc --separate --force -o docs/source oauth2client
 # We only have one package, so modules.rst is overkill.
 rm -f docs/source/modules.rst
 

@@ -1,6 +1,4 @@
-#!/bin/bash
-#
-# Copyright 2014 Google Inc. All rights reserved.
+# Copyright 2016 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,22 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# Build the googleoauth2django docs.
 
-set -e
+"""Defines a configuration for our test application.
 
-rm -rf docs/_build/* docs/source/*
-sphinx-apidoc --separate --force -o docs/source googleoauth2django
-# We only have one package, so modules.rst is overkill.
-rm -f docs/source/modules.rst
+Having a test application enables us to use the Django test database and
+other useful features."""
 
-# If anything has changed
-if [[ -n "$(git diff -- docs/)" ]]; then
-    echo "sphinx-apidoc generated changes that are not checked in to version control."
-    exit 1
-fi
+from django.apps import AppConfig
 
-cd docs
-make html
-cd ..
+
+class DjangoOrmTestApp(AppConfig):
+    """App Config for Django Helper."""
+    name = 'tests'
+    verbose_name = "Django Test App"
+    label = "DjangoORMTestApp"
